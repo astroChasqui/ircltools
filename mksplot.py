@@ -65,14 +65,16 @@ def main(linelist, speclist, file_out='getew.cl', directory=''):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(
-               description='')
+               description='Creates a cl file to measure EWs in IRAF with '+\
+                           'splot so that each line in the linelist is '   +\
+                           'shown for every spectrum in the speclist file')
     parser.add_argument('linelist',
                         help='A CSV file with a "wavelength" column')
     parser.add_argument('speclist',
                         help='A CSV file with a star "id" column')
     parser.add_argument('-f', '--file_out', default='getew.cl',
-                        help='output CL file')
+                        help='output CL file (default=getew.cl)')
     parser.add_argument('-d', '--directory', default='',
-                        help='location of the spectra')
+                        help='location of the spectra (default=this_directory)')
     args = parser.parse_args()
     main(args.linelist, args.speclist, args.file_out, args.directory)

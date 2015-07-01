@@ -93,14 +93,17 @@ def main(file_in, template, file_out, window=0.1, inspect=False):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(
-               description='reads an IRAF splot.log file and puts EW '+\
-                           'measurements into a CSV file')
+               description='Reads an IRAF splot.log file and puts the EW '+\
+                           'measurements into a CSV file.')
     parser.add_argument('file_in', help='the splot.log file')
     parser.add_argument('template', help='a template line list')
     parser.add_argument('file_out', help='output CSV file')
     parser.add_argument('-w', '--window', default=0.1, type=float,\
-                        help='wavelength window to search for lines')
+                        help='wavelength window to search for lines '+\
+                        '(default=0.1A)')
     parser.add_argument('-i', '--inspect', action="store_true",\
-                        help='inspect input splot.log file (could be useful to figure out where in that file is the code crashing)')
+                        help='inspect input splot.log file (could be useful '+\
+                        'to figure out where in that file the code is '+\
+                        'crashing)')
     args = parser.parse_args()
     main(args.file_in, args.template, args.file_out, args.window, args.inspect)
