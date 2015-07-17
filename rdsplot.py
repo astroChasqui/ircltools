@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.ERROR)
 
 def main(file_in, template, file_out, window=0.1, inspect=False):
     logger.info('Reading input file: '+file_in)
-    f = open(file_in, 'r')
+    f = open(file_in, 'rU')
     sp, ww, ew = [], [], []
     frl = f.readlines()
     for nline, line in zip(range(1, len(frl)+1), frl):
