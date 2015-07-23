@@ -15,6 +15,7 @@ __email__ = 'ivan@astro.as.utexas.edu'
 import logging
 import numpy as np
 from pandas import read_csv
+import re
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.ERROR)
@@ -44,7 +45,7 @@ def main(file_in, template, file_out, window=0.1, inspect=False):
 
     x = read_csv(template)
 
-    stars = sorted(set(sp))
+    stars = sorted_nicely(set(sp))
     f = open(file_out, 'w')
     f.write('wavelength,species,ep,gf,'+','.join(stars)+'\n')
 
@@ -89,6 +90,12 @@ def main(file_in, template, file_out, window=0.1, inspect=False):
                 f.write(line+'\n')
     f.close()
     logger.info('Output file: '+file_out)
+
+def sorted_nicely(l):
+    """ Sort the given iterable in the way that humans expect."""
+    convert = lambda text: int(text) if text.isdigit() else text
+    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)] 
+    return sorted(l, key=alphanum_key)
 
 if __name__ == '__main__':
     import argparse
